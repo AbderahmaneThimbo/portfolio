@@ -8,6 +8,13 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+      transitionProperty: {
+        height: "height",
+        width: "width",
+        top: "top",
+        left: "left",
+        filter: "filter",
+      },
     },
   },
   plugins: [tailwindScrollbar],

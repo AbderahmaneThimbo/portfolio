@@ -1,3 +1,5 @@
+import { ButtonPrimary, ButtonOutline } from "./Button";
+
 const Hero = () => {
   return (
     <section id="home" className="pt-28 lg:pt-36">
@@ -6,7 +8,7 @@ const Hero = () => {
           <div className="flex items-center gap-3">
             <figure className="img-box w-9 h-9 rounded-lg">
               <img
-                src="/images/avatar-1.jpg"
+                src="/images/avatar-1.JPG"
                 width={40}
                 height={40}
                 alt="Abderahmane Thimbo portrait"
@@ -24,7 +26,8 @@ const Hero = () => {
             Building Scalable Modern Websites for the Future
           </h2>
           <div className="flex items-center gap-3">
-            ButtonPrimary ButtonOutline
+            <ButtonPrimary label="Download CV" icon={"download"} />
+            <ButtonOutline href="#about" label="Scroll down" icon="arrow_downward" />
           </div>
         </div>
 
