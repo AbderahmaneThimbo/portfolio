@@ -94,6 +94,9 @@ body {
   @apply text-3xl lg:text-4xl lg:leading-tight font-semibold;
 }
 
+.title-1 {
+  @applyy text-[22px] font-semibold
+}
 
 /* about */
 
