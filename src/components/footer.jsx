@@ -26,11 +26,11 @@ const sitemap = [
 const socials = [
     {
         label: 'GitHub',
-        href: 'https://www.github.com/codewithsadee-org'
+        href: 'https://github.com/AbderahmaneThimbo'
     },
     {
         label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/codewithsadee'
+        href: 'https://www.linkedin.com/in/abderahmane-thimbo-854b10309/'
     },
     {
         label: 'Twitter X',
@@ -38,11 +38,7 @@ const socials = [
     },
     {
         label: 'Instagram',
-        href: 'https://www.instagram.com/codewithsadee'
-    },
-    {
-        label: 'CodePen',
-        href: 'https://codepen.io/codewithsadee'
+        href: 'https://www.instagram.com/abdu_erahmane/'
     }
 ];
 
