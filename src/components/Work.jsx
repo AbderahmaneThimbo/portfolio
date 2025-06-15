@@ -2,41 +2,36 @@ import PortfolioCard from "./PortfolioCard";
 
 const works = [
     {
-        imgSrc: '/images/project-1.jpg',
-        title: 'Full stack music app',
-        tags: ['API', 'MVC', 'Development'],
-        projectLink: 'https://musify-5al0.onrender.com/'
+        imgSrc: '/images/ShopGrids.png',
+        title: 'ShopGrids',
+        tags: ['eCommerce', 'website'],
+        projectLink: 'https://abderahmanethimbo.github.io/ShopGrids/'
     },
     {
         imgSrc: '/images/project-2.jpg',
-        title: 'Free stock photo app',
-        tags: ['API', 'SPA'],
-        projectLink: 'https://pixstock-official.vercel.app/'
+        title: 'Travel',
+        tags: ['website'],
+        projectLink: 'https://abderahmanethimbo.github.io/travel/'
     },
     {
-        imgSrc: '/images/project-3.jpg',
-        title: 'Recipe app',
-        tags: ['Development', 'API'],
-        projectLink: ''
+        imgSrc: '/images/codakt.jpg',
+        title: 'Codakt',
+        tags: ['web design'],
+        projectLink: 'https://abderahmanethimbo.github.io/Codakt/'
     },
     {
-        imgSrc: '/images/project-4.jpg',
-        title: 'Real state website',
-        tags: ['Web-design', 'Development'],
-        projectLink: 'https://github.com/codewithsadee-org/wealthome'
+        imgSrc: '/images/reservation.png',
+        title: 'Reservation API',
+        tags: ['RestAPI', 'Development'],
+        projectLink: 'https://github.com/AbderahmaneThimbo/reservation-API'
     },
     {
-        imgSrc: '/images/project-5.jpg',
+        imgSrc: '/images/ocazion.webp',
         title: 'eCommerce website',
         tags: ['eCommerce', 'Development'],
-        projectLink: 'https://github.com/codewithsadee/anon-ecommerce-website'
+        projectLink: 'https://ocazion.vercel.app/'
     },
-    {
-        imgSrc: '/images/project-6.jpg',
-        title: 'vCard Personal portfolio',
-        tags: ['Web-design', 'Development'],
-        projectLink: 'https://github.com/codewithsadee/vcard-personal-portfolio'
-    },
+ 
 ];
 
 const Work = () => {
@@ -46,7 +41,7 @@ const Work = () => {
                 <h2 className="headline-2 mb-8">
                     My portfolio highlights
                 </h2>
-                <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">
+                <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(270px,_1fr))]">
                     {
                         works.map(({ imgSrc, title, tags, projectLink }, key) => (
                             <PortfolioCard

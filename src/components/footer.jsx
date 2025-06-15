@@ -33,10 +33,6 @@ const socials = [
         href: 'https://www.linkedin.com/in/abderahmane-thimbo-854b10309/'
     },
     {
-        label: 'Twitter X',
-        href: 'https://x.com/codewithsadee_'
-    },
-    {
         label: 'Instagram',
         href: 'https://www.instagram.com/abdu_erahmane/'
     }

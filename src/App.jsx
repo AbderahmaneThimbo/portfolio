@@ -13,6 +13,7 @@ import Work from "./components/Work";
 import Review from "./components/Review";
 import Contact from "./components/Contact";
 import Footer from "./components/footer";
+import FloatingContact from './components/FloatingContact';
 
 const App = () => {
 
@@ -43,6 +44,7 @@ const App = () => {
         <Skill />
         <Work />
         {/* <Review /> */}
+        <FloatingContact />
         <Contact />
       </main>
       <Footer />
