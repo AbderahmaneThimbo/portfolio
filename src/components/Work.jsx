@@ -8,13 +8,13 @@ const works = [
         projectLink: 'https://abderahmanethimbo.github.io/ShopGrids/'
     },
     {
-        imgSrc: '/images/project-2.jpg',
+        imgSrc: '/images/travel.png',
         title: 'Travel',
         tags: ['website'],
         projectLink: 'https://abderahmanethimbo.github.io/travel/'
     },
     {
-        imgSrc: '/images/codakt.jpg',
+        imgSrc: '/images/Codakt.png',
         title: 'Codakt',
         tags: ['web design'],
         projectLink: 'https://abderahmanethimbo.github.io/Codakt/'
@@ -26,7 +26,7 @@ const works = [
         projectLink: 'https://github.com/AbderahmaneThimbo/reservation-API'
     },
     {
-        imgSrc: '/images/ocazion.webp',
+        imgSrc: '/images/ocazion.png',
         title: 'eCommerce website',
         tags: ['eCommerce', 'Development'],
         projectLink: 'https://ocazion.vercel.app/'
