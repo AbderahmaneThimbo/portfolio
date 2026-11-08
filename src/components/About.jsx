@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const aboutItems = [
     {
         label: 'Project done',

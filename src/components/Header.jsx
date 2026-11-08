@@ -1,39 +1,100 @@
-import Navbar from "./Navbar";
-import { useState } from "react";
-const Header = () => {
-  const [navOpen, setNavOpen] = useState(false);
-  return (
-    <header className="fixed top-0 left-0 w-full h-20 flex items-center z-40 bg-gradient-to-b from-zinc-900 to-zinc-900/0">
-      <div className="max-w-screen-2xl w-full mx-auto px-4 flex justify-between items-center md:px-6 md:grid md:grid-cols-[1fr,3fr,1fr]">
-        <h1>
-          <a href="/" className="logo">
-            <img
-              src="/images/logo.svg"
-              width={40}
-              height={40}
-              alt="Abderahmane Thimbo"
-            />
-          </a>
-        </h1>
+import { useEffect, useState } from "react";
+import { NAV, PROFILE } from "../data/content";
+import ThemeToggle from "./ThemeToggle";
 
-        <div className="relative md:justify-self-center">
-          <button
-            className="menu-btn md:hidden"
-            onClick={() => setNavOpen((prev) => !prev)}
-          >
-            <span className="material-symbols-rounded">
-              {" "}
-              {navOpen ? "close" : "menu"}
-            </span>
-          </button>
-          <Navbar navOpen={navOpen} />
-        </div>
-        <a
-          href="#contact"
-          className="btn btn-secondary max-md:hidden md:justify-self-end"
-        >
-          Contact Me
+// Highlights the link of the section currently on screen.
+const useActiveSection = (ids) => {
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [ids]);
+  return active;
+};
+
+const SECTION_IDS = NAV.map((n) => n.href.slice(1));
+
+const Header = () => {
+  const [open, setOpen] = useState(false);
+  const active = useActiveSection(SECTION_IDS);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  return (
+    <header className="fixed left-1/2 top-3 z-40 w-[min(1100px,calc(100%-24px))] -translate-x-1/2 md:top-4">
+      <nav
+        aria-label="Navigation principale"
+        className="glass flex h-14 items-center gap-1 rounded-full pl-5 pr-2"
+      >
+        <a href="#accueil" className="mr-auto text-[17px] font-semibold tracking-[-0.01em]">
+          {PROFILE.firstName}
         </a>
+
+        <ul className="hidden items-center md:flex">
+          {NAV.map(({ label, href }) => (
+            <li key={href}>
+              <a
+                href={href}
+                aria-current={active === href.slice(1) ? "true" : undefined}
+                className="block rounded-full px-4 py-2 text-[15px] transition-colors hover:bg-[var(--tint)] aria-[current]:bg-[var(--tint)] aria-[current]:font-semibold"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="ml-1 flex items-center gap-2">
+          <ThemeToggle />
+          <a href="#contact" className="btn btn-primary max-md:hidden">
+            Me contacter
+          </a>
+          <button
+            type="button"
+            className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-[var(--tint)] md:hidden"
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 8h16M4 16h16" />}
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <div
+        id="menu-mobile"
+        className={`glass mt-2 rounded-[var(--r-l)] p-2 transition-all duration-300 md:hidden ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
+        }`}
+      >
+        <ul>
+          {[...NAV, { label: "Contact", href: "#contact" }].map(({ label, href }) => (
+            <li key={href}>
+              <a
+                href={href}
+                onClick={() => setOpen(false)}
+                className="block rounded-2xl px-4 py-3 text-xl font-medium hover:bg-[var(--tint)]"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </header>
   );

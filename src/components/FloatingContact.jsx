@@ -1,46 +1,32 @@
-import React, { useState } from 'react';
-import { FaWhatsapp, FaEnvelope, FaLinkedin, FaComments } from 'react-icons/fa';
+import { useEffect, useState } from "react";
+import { SiWhatsapp } from "react-icons/si";
+import { whatsappLink } from "../data/content";
 
+// A glass WhatsApp button that floats above the content, hidden while the contact section is on screen.
 const FloatingContact = () => {
-  const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const target = document.getElementById("contact");
+    if (!target) return;
+    const observer = new IntersectionObserver(([e]) => setHidden(e.isIntersecting), { threshold: 0.2 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end space-y-3">
-      {open && (
-        <div className="flex flex-col space-y-2 bg-white p-3 rounded-xl shadow-xl">
-          <a
-            href="https://wa.me/+22249028081"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-500 hover:scale-110 transition-transform text-2xl"
-          >
-            <FaWhatsapp />
-          </a>
-          <a
-  href="mailto:abderahmanethimbo@gmail.com"
-  className="text-red-600 hover:scale-110 transition-transform text-2xl"
->
-  <FaEnvelope />
-</a>
-          <a
-            href="https://www.linkedin.com/in/abderahmane-thimbo-854b10309"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:scale-110 transition-transform text-2xl"
-          >
-            <FaLinkedin />
-          </a>
-        </div>
-      )}
-
-      <button
-        onClick={() => setOpen(!open)}
-        className="btn btn-primary rounded-full p-3 text-xl"
-        title="Contactez-moi"
-      >
-        <FaComments />
-      </button>
-    </div>
+    <a
+      href={whatsappLink("Bonjour Abderahmane, ")}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Écrire sur WhatsApp"
+      className={`glass fixed bottom-4 right-4 z-40 flex h-14 items-center gap-2.5 rounded-full pl-4 pr-5 font-semibold transition-all duration-300 hover:-translate-y-0.5 md:bottom-6 md:right-6 ${
+        hidden ? "pointer-events-none translate-y-4 opacity-0" : "opacity-100"
+      }`}
+    >
+      <SiWhatsapp className="h-6 w-6 text-[#25d366]" aria-hidden="true" />
+      WhatsApp
+    </a>
   );
 };
 

@@ -1,21 +1,23 @@
 /** @type {import('tailwindcss').Config} */
-import tailwindScrollbar from "tailwind-scrollbar";
-
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
       },
-      transitionProperty: {
-        height: "height",
-        width: "width",
-        top: "top",
-        left: "left",
-        filter: "filter",
+      colors: {
+        bg: "var(--bg)",
+        ink: "var(--ink)",
+        "ink-2": "var(--ink-2)",
+        accent: "var(--accent)",
+        "accent-ink": "var(--accent-ink)",
+      },
+      borderRadius: {
+        xl2: "var(--r-xl)",
+        l: "var(--r-l)",
       },
     },
   },
-  plugins: [tailwindScrollbar],
+  plugins: [],
 };

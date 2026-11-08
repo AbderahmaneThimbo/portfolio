@@ -26,3 +26,6 @@ firebase.json
 *.njsproj
 *.sln
 *.sw?
+
+# design mockups and inspector screenshots
+.taste-skill/

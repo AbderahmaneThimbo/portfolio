@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-600"
->
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abderahman Thimbo - Portfolio</title>
-
-    <link
-      rel="shortcut icon"
-      href="public/images/favicon.svg"
-      type="image/svg+xml"
+    <title>Abderahmane Thimbo, développeur full stack à Nouakchott</title>
+    <meta
+      name="description"
+      content="Développeur full stack à Nouakchott : frontend en React, Vue.js et Flutter, backend en Java Spring et Node.js. Sites, applis et API."
     />
+    <meta property="og:title" content="Abderahmane Thimbo, développeur full stack" />
+    <meta
+      property="og:description"
+      content="Frontend React, Vue.js et Flutter, backend Java Spring et Node.js. Basé à Nouakchott, Mauritanie."
+    />
+    <meta property="og:image" content="/images/abderahmane.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#f5f5f7" />
+
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+
+    <!-- Apply the saved or system theme before first paint, so the page never flashes. -->
+    <script>
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem("theme"); } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
       rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0"
     />
   </head>
   <body>
