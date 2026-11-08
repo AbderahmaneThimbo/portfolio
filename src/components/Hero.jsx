@@ -6,9 +6,11 @@ const formatTime = () =>
   new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: PROFILE.timeZone }).format(new Date());
 
 // The local time in Nouakchott, live: a visitor abroad sees at a glance when a reply is likely.
+// It starts empty so the pre-rendered page never shows the time of the build.
 const LocalTime = () => {
-  const [time, setTime] = useState(formatTime);
+  const [time, setTime] = useState("--:--");
   useEffect(() => {
+    setTime(formatTime());
     const id = setInterval(() => setTime(formatTime()), 10000);
     return () => clearInterval(id);
   }, []);
@@ -40,11 +42,15 @@ const Hero = () => (
     </div>
 
     <figure className="hero-photo relative aspect-square overflow-hidden rounded-[var(--r-xl)] max-md:order-first md:aspect-[4/5]">
+      {/* The largest thing on the first screen: sized per screen, never lazy, and preloaded in index.html. */}
       <img
-        src={PROFILE.photo}
+        src="/images/abderahmane-1086.webp"
+        srcSet="/images/abderahmane-640.webp 640w, /images/abderahmane-1086.webp 1086w"
+        sizes="(min-width: 768px) 46vw, calc(100vw - 32px)"
         alt="Abderahmane Thimbo en chemise noire, lunettes rondes, devant un mur en bois"
         width="1086"
         height="1028"
+        decoding="async"
         className="h-full w-full object-cover object-[50%_20%]"
       />
       <figcaption className="glass-clear absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-[var(--r-l)] px-4 py-3 md:inset-x-4 md:bottom-4">

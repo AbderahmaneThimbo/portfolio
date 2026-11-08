@@ -37,23 +37,26 @@ const App = () => {
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
+    // index.html hid the opening's elements before first paint (.intro). Take over from there in the same
+    // frame, so nothing flashes; if the script arrived too late, the page simply stays as it is.
+    const html = document.documentElement;
+    const playIntro = html.classList.contains("intro") && !window.__skipIntro;
+    html.classList.remove("intro");
+
     // Motion only for people who have not asked for less of it; everyone else sees the page at rest.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      /* Opening: the bar drops in (the logo unfolds itself, see Header), the name rises, the photo opens like a shutter. */
-      gsap
-        .timeline({ defaults: { ease: "power3.out", duration: 0.9 } })
-        .from(".site-nav", { y: -28, opacity: 0, duration: 0.8, ...DONE })
-        .from(".hero-name .word", { yPercent: 110, duration: 1.1, ease: "power4.out", stagger: 0.09 }, 0.2)
-        .from(".hero-copy > :not(h1)", { y: 24, opacity: 0, stagger: 0.08, ...DONE }, 0.6)
-        .from(
-          ".hero-photo",
-          { clipPath: "inset(100% 0% 0% 0% round 32px)", duration: 1.4, ease: "power4.inOut", ...DONE },
-          0.1
-        )
-        .from(".hero-photo img", { scale: 1.25, duration: 1.9, ease: "power3.out" }, 0.1)
-        .from(".hero-photo figcaption", { y: 30, opacity: 0, duration: 0.8, ...DONE }, 1.1)
-        .from(".hero-facts > *", { y: 28, opacity: 0, stagger: 0.08, ...DONE }, 0.9)
-        .from("[data-count]", { textContent: 0, snap: { textContent: 1 }, duration: 1.4, ease: "power2.out" }, 1);
+      /* Opening: the bar drops in (the logo unfolds itself, see Header), the name rises, the photo settles. */
+      if (playIntro) {
+        gsap
+          .timeline({ defaults: { ease: "power3.out", duration: 0.9 } })
+          .from(".site-nav", { y: -28, opacity: 0, duration: 0.8, ...DONE })
+          .from(".hero-name .word", { yPercent: 110, duration: 1.1, ease: "power4.out", stagger: 0.09 }, 0.1)
+          .from(".hero-copy > :not(h1)", { y: 24, opacity: 0, stagger: 0.08, ...DONE }, 0.45)
+          .from(".hero-photo img", { scale: 1.25, duration: 1.8, ease: "power3.out" }, 0)
+          .from(".hero-photo figcaption", { y: 30, opacity: 0, duration: 0.8, ...DONE }, 0.8)
+          .from(".hero-facts > *", { y: 28, opacity: 0, stagger: 0.08, ...DONE }, 0.7)
+          .from("[data-count]", { textContent: 0, snap: { textContent: 1 }, duration: 1.4, ease: "power2.out" }, 0.8);
+      }
 
       /* The portrait drifts slightly slower than the page. */
       gsap.to(".hero-photo img", {

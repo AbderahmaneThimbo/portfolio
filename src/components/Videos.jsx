@@ -6,18 +6,32 @@ import { Title } from "./Split";
 const MEDIA = "aspect-[9/16] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]";
 
 // The opening seconds of a real video, muted and looping; a still cover for people who prefer less motion.
+// Nothing is downloaded until the video comes near the screen, and it pauses when it leaves it.
 const Clip = ({ src, poster }) => {
   const ref = useRef(null);
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => (reduce.matches ? video.pause() : video.play().catch(() => {}));
-    sync();
+    let visible = false;
+    const sync = () => {
+      if (visible && !reduce.matches) {
+        if (!video.src) video.src = src;
+        video.play().catch(() => {});
+      } else video.pause();
+    };
+    const observer = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      sync();
+    }, { rootMargin: "200px 0px" });
+    observer.observe(video);
     reduce.addEventListener("change", sync);
-    return () => reduce.removeEventListener("change", sync);
-  }, []);
-  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="metadata" width="540" height="960" className={MEDIA} />;
+    return () => {
+      observer.disconnect();
+      reduce.removeEventListener("change", sync);
+    };
+  }, [src]);
+  return <video ref={ref} poster={poster} muted loop playsInline preload="none" width="540" height="960" className={MEDIA} />;
 };
 Clip.propTypes = { src: PropTypes.string.isRequired, poster: PropTypes.string.isRequired };
 

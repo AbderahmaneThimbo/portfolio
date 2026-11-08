@@ -92,8 +92,8 @@ body {
   content: "";
   position: absolute;
   inset: -20%;
-  background: url("/images/abderahmane.jpg") center 30% / cover;
-  filter: blur(90px) saturate(1.6);
+  background: url("/images/abderahmane-ambient.webp") center 30% / cover;
+  /* The blur and colour boost are baked into this tiny image: no live filter to compute. */
   opacity: var(--ambient);
   transition: opacity 0.5s;
 }
@@ -139,11 +139,10 @@ body {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
 
-  /* Content layer: a thin standard material, no specular edge. */
+  /* Content layer: a thin standard material, no specular edge. What lies behind it is the already
+     soft ambient light, so a translucent fill looks the same as a live blur and costs nothing. */
   .mat {
     background: var(--mat);
-    -webkit-backdrop-filter: blur(18px) saturate(1.3);
-    backdrop-filter: blur(18px) saturate(1.3);
     border: 1px solid var(--mat-edge);
   }
 
@@ -388,4 +387,21 @@ a:focus-visible .logo[data-folded="false"] .logo-br-close { transform: translate
   [data-tilt] {
     transform: none;
   }
+}
+
+/* Opening animation, prepared before first paint (index.html adds .intro; App removes it as the
+   animation starts). The photo stays visible, only zoomed, so the page's largest image paints at once. */
+.intro .site-nav,
+.intro .hero-copy > :not(h1),
+.intro .hero-facts > *,
+.intro .hero-photo figcaption {
+  opacity: 0;
+}
+
+.intro .hero-name .word {
+  transform: translateY(110%);
+}
+
+.intro .hero-photo img {
+  transform: scale(1.25);
 }

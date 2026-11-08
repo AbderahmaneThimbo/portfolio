@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 const NAME = [..."Da7man"];
@@ -36,7 +36,7 @@ const Logo = ({ className = "", auto = false, hold = false }) => {
   const [width, setWidth] = useState(null);
 
   // The gap between the brackets animates to the name's real width, re-measured once the font has loaded.
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = innerRef.current;
     const measure = () => setWidth(el.scrollWidth);
     measure();

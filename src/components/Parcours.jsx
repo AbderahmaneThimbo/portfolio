@@ -11,7 +11,7 @@ const Parcours = () => (
         ))}
       </div>
       <div className="mt-8 flex items-center gap-3">
-        <img src="/images/abderahmane-avatar.jpg" alt="" width="48" height="48" className="h-12 w-12 rounded-full object-cover" />
+        <img src="/images/abderahmane-avatar.webp" alt="" width="48" height="48" className="h-12 w-12 rounded-full object-cover" />
         <p className="leading-tight">
           <span className="block font-semibold">{PROFILE.name}</span>
           <span className="text-[15px] text-ink-2">{PROFILE.role}</span>

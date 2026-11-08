@@ -33,7 +33,7 @@ const THEME_COLOR = { light: "#f5f5f7", dark: "#000000" };
 
 const readTheme = () => document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 
-const PixelIcon = ({ rows, visible, className }) => {
+const PixelIcon = ({ rows, visible, animate, className }) => {
   // A fixed pseudo-random delay per pixel, so the dissolve looks scattered but stays stable.
   const pixels = useMemo(
     () => toPixels(rows).map((p, i) => ({ ...p, delay: ((i * 53) % 17) * 18 })),
@@ -53,7 +53,7 @@ const PixelIcon = ({ rows, visible, className }) => {
           style={{
             transformBox: "fill-box",
             transformOrigin: "center",
-            transition: "opacity 260ms ease, transform 320ms cubic-bezier(.3,1.4,.4,1)",
+            transition: animate ? "opacity 260ms ease, transform 320ms cubic-bezier(.3,1.4,.4,1)" : "none",
             transitionDelay: `${delay}ms`,
             opacity: visible ? 1 : 0,
             transform: visible ? "scale(1)" : "scale(0.2) translateY(1.5px)",
@@ -66,13 +66,22 @@ const PixelIcon = ({ rows, visible, className }) => {
 PixelIcon.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.string).isRequired,
   visible: PropTypes.bool.isRequired,
+  animate: PropTypes.bool,
   className: PropTypes.string,
 };
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(readTheme);
+  // The page is pre-rendered without knowing the visitor's theme: read it once mounted (index.html has
+  // already applied it), and only allow the thumb to animate after that, so it does not slide on load.
+  const [theme, setTheme] = useState(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    if (theme === null) {
+      setTheme(readTheme());
+      const id = requestAnimationFrame(() => setReady(true));
+      return () => cancelAnimationFrame(id);
+    }
     document.documentElement.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLOR[theme]);
   }, [theme]);
@@ -147,7 +156,7 @@ const ThemeToggle = () => {
         className="absolute left-[3px] top-[3px] grid h-[34px] w-10 place-items-center rounded-xl"
         style={{
           transform: dark ? "translateX(28px)" : "none",
-          transition: "transform 550ms cubic-bezier(.3,1.4,.4,1), box-shadow 400ms, background-color 400ms",
+          transition: ready ? "transform 550ms cubic-bezier(.3,1.4,.4,1), box-shadow 400ms, background-color 400ms" : "none",
           background: dark ? "rgba(120,140,255,.18)" : "rgba(255,255,255,.4)",
           WebkitBackdropFilter: "blur(10px)",
           backdropFilter: "blur(10px)",
@@ -156,8 +165,8 @@ const ThemeToggle = () => {
             : "inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 4px rgba(0,0,0,.12), 0 0 0 1px rgba(255,255,255,.6), 0 4px 14px rgba(0,0,0,.2)",
         }}
       >
-        <PixelIcon rows={SUN} visible={!dark} className="text-[#1d1d1f]" />
-        <PixelIcon rows={MOON} visible={dark} className="text-[#e8ecff]" />
+        <PixelIcon rows={SUN} visible={!dark} animate={ready} className="text-[#1d1d1f]" />
+        <PixelIcon rows={MOON} visible={dark} animate={ready} className="text-[#e8ecff]" />
       </span>
     </button>
   );

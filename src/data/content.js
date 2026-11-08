@@ -120,7 +120,7 @@ export const PROJECTS = [
     kind: "E-commerce complet",
     tags: ["React", "Node.js"],
     href: "https://ocazion.vercel.app/",
-    shots: ["/images/work/ocazion-d1.jpg", "/images/work/ocazion-m1.jpg"],
+    shots: ["/images/work/ocazion-d1.webp", "/images/work/ocazion-m1.webp"],
     feature: true,
   },
   {
@@ -130,9 +130,9 @@ export const PROJECTS = [
       "Un radar montre les personnes à moins de 5 km. On envoie une demande d’ami avant le premier message, puis on discute en tête-à-tête. Position arrondie à 500 m et mode invisible pour protéger la vie privée.",
     tags: ["Flutter", "Firebase", "Android et iOS"],
     status: "En développement",
-    icon: "/images/work/nearu-icon.png",
+    icon: "/images/work/nearu-icon.webp",
     // Real screens from the app (the other user's name was removed from the radar).
-    shots: ["/images/work/nearu-radar.jpg", "/images/work/nearu-profil.jpg"],
+    shots: ["/images/work/nearu-radar.webp", "/images/work/nearu-profil.webp"],
     feature: true,
   },
   {
@@ -147,21 +147,21 @@ export const PROJECTS = [
     kind: "Boutique de mode en ligne",
     tags: ["E-commerce", "Site web"],
     href: "https://abderahmanethimbo.github.io/ShopGrids/",
-    shots: ["/images/work/shopgrids-d1.jpg", "/images/work/shopgrids-m1.jpg"],
+    shots: ["/images/work/shopgrids-d1.webp", "/images/work/shopgrids-m1.jpg"],
   },
   {
     name: "Travel",
     kind: "Site vitrine d’agence de voyage",
     tags: ["Site web"],
     href: "https://abderahmanethimbo.github.io/travel/",
-    shots: ["/images/work/travel-d1.jpg", "/images/work/travel-m1.jpg"],
+    shots: ["/images/work/travel-d1.webp", "/images/work/travel-m1.jpg"],
   },
   {
     name: "Codakt",
     kind: "Landing page de formation",
     tags: ["Web design"],
     href: "https://abderahmanethimbo.github.io/Codakt/",
-    shots: ["/images/work/codakt-d1.jpg", "/images/work/codakt-m1.jpg"],
+    shots: ["/images/work/codakt-d1.webp", "/images/work/codakt-m1.jpg"],
   },
   {
     name: "Mailer",
@@ -182,11 +182,11 @@ export const VIDEOS = {
   items: [
     {
       title: "Robot ou humain ? Ce test sert à autre chose",
-      cover: "/images/videos/captcha.jpg",
+      cover: "/images/videos/captcha.webp",
       clip: "/videos/captcha-loop.mp4",
     },
-    { title: "Non, je ne pirate pas le compte de ton ex", cover: "/images/videos/informaticien.jpg" },
-    { title: "Pourquoi 4 chiffres seulement ?", cover: "/images/videos/code-pin.jpg" },
+    { title: "Non, je ne pirate pas le compte de ton ex", cover: "/images/videos/informaticien.webp" },
+    { title: "Pourquoi 4 chiffres seulement ?", cover: "/images/videos/code-pin.webp" },
   ],
 };
 
