@@ -45,7 +45,7 @@ const Hero = () => (
       {/* The largest thing on the first screen: sized per screen, never lazy, and preloaded in index.html. */}
       <img
         src="/images/abderahmane-1086.webp"
-        srcSet="/images/abderahmane-640.webp 640w, /images/abderahmane-1086.webp 1086w"
+        srcSet="/images/abderahmane-640.webp 640w, /images/abderahmane-828.webp 828w, /images/abderahmane-1086.webp 1086w"
         sizes="(min-width: 768px) 46vw, calc(100vw - 32px)"
         alt="Abderahmane Thimbo en chemise noire, lunettes rondes, devant un mur en bois"
         width="1086"
@@ -60,7 +60,7 @@ const Hero = () => (
         </span>
         <span className="text-[15px] leading-tight">
           Ouvert aux projets freelance
-          <span className="block text-[15px] opacity-80">{PROFILE.city}</span>
+          <span className="block text-[15px]">{PROFILE.city}</span>
         </span>
         <LocalTime />
       </figcaption>

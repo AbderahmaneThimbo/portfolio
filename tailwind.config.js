@@ -10,7 +10,7 @@ export default {
         bg: "var(--bg)",
         ink: "var(--ink)",
         "ink-2": "var(--ink-2)",
-        accent: "var(--accent)",
+        accent: "var(--accent-text)",
         "accent-ink": "var(--accent-ink)",
       },
       borderRadius: {

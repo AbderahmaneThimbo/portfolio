@@ -1,0 +1,26 @@
+# Abderahmane Thimbo (Da7man)
+
+> Développeur full stack à Nouakchott, Mauritanie. Frontend en React, Vue.js et Flutter, backend en Java Spring et Node.js. Il crée des sites web, des applications mobiles et des API, et accepte des projets freelance.
+
+Portfolio d'une seule page, en français. Contact direct par WhatsApp (+222 49 02 80 81) ou par email (abderahmanethimbo@gmail.com).
+
+## Pages
+
+- [Portfolio](https://abderahmane-portfolio-dev.web.app/): présentation, projets, parcours, stack, vidéos et contact
+- [CV (PDF)](https://abderahmane-portfolio-dev.web.app/assets/Abderahmane-CV.pdf): expériences, formations et compétences
+
+## Projets
+
+- [Ocazion](https://ocazion.vercel.app/): site e-commerce complet, React et Node.js
+- [Reservation API](https://github.com/AbderahmaneThimbo/reservation-API): API REST de réservations, Node.js, Express et Prisma
+- [ShopGrids](https://abderahmanethimbo.github.io/ShopGrids/): boutique de mode en ligne
+- [Travel](https://abderahmanethimbo.github.io/travel/): site vitrine d'agence de voyage
+- [Codakt](https://abderahmanethimbo.github.io/Codakt/): landing page de formation
+- NearU : application mobile d'amitié par la proximité (Flutter, Firebase), en développement
+
+## Profils
+
+- [GitHub](https://github.com/AbderahmaneThimbo)
+- [LinkedIn](https://www.linkedin.com/in/abderahmane-thimbo-854b10309/)
+- [TikTok](https://www.tiktok.com/@abduerahmane92i): vidéos « le web expliqué »
+- [Instagram](https://www.instagram.com/abdu_erahmane/)

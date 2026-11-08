@@ -31,7 +31,7 @@ const Clip = ({ src, poster }) => {
       reduce.removeEventListener("change", sync);
     };
   }, [src]);
-  return <video ref={ref} poster={poster} muted loop playsInline preload="none" width="540" height="960" className={MEDIA} />;
+  return <video ref={ref} poster={poster} muted loop playsInline preload="none" width="540" height="960" aria-hidden="true" className={MEDIA} />;
 };
 Clip.propTypes = { src: PropTypes.string.isRequired, poster: PropTypes.string.isRequired };
 
@@ -57,7 +57,16 @@ const Videos = () => (
               {clip ? (
                 <Clip src={clip} poster={cover} />
               ) : (
-                <img src={cover} alt="" width="540" height="960" loading="lazy" className={MEDIA} />
+                <img
+                  src={cover}
+                  srcSet={`${cover.replace(".webp", "-220.webp")} 220w, ${cover} 440w`}
+                  sizes="(min-width: 768px) 220px, 33vw"
+                  alt=""
+                  width="440"
+                  height="782"
+                  loading="lazy"
+                  className={MEDIA}
+                />
               )}
             </span>
             <span className="mt-3 hidden text-[15px] font-medium leading-snug md:block">{title}</span>

@@ -27,19 +27,28 @@ const Contact = () => {
           <Title text="Un projet en tête ?" className="mb-4" />
           <p className="lead mb-8 max-w-[38ch]">Décris-le en deux lignes. Ton message s’ouvre dans WhatsApp, prêt à envoyer.</p>
 
-          <fieldset className="mb-6">
-            <legend className="mb-3 font-semibold">C’est pour…</legend>
-            <div className="flex flex-wrap gap-2">
-              {PROJECT_TYPES.map((t) => (
-                <label key={t} className="cursor-pointer">
-                  <input type="radio" name="type" value={t} checked={form.type === t} onChange={set("type")} className="peer sr-only" />
-                  <span className="inline-flex h-11 items-center rounded-full bg-[var(--tint)] px-4 transition-colors peer-checked:bg-[var(--ink)] peer-checked:text-[var(--bg)] peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-[var(--accent)]">
+          {/* Plain buttons (not hidden radio inputs inside labels), so a tap works the same on every phone. */}
+          <div className="mb-6">
+            <p id="type-label" className="mb-3 font-semibold">C’est pour…</p>
+            <div role="group" aria-labelledby="type-label" className="flex flex-wrap gap-2">
+              {PROJECT_TYPES.map((t) => {
+                const on = form.type === t;
+                return (
+                  <button
+                    key={t}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setForm((f) => ({ ...f, type: on ? "" : t }))}
+                    className={`inline-flex h-11 touch-manipulation items-center rounded-full px-4 transition-colors ${
+                      on ? "bg-[var(--ink)] text-[var(--bg)]" : "bg-[var(--tint)] text-ink"
+                    }`}
+                  >
                     {t}
-                  </span>
-                </label>
-              ))}
+                  </button>
+                );
+              })}
             </div>
-          </fieldset>
+          </div>
 
           <label htmlFor="project" className="mb-2 font-semibold">Ton projet</label>
           <textarea

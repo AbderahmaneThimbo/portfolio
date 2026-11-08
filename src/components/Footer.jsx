@@ -12,10 +12,14 @@ const Footer = () => (
       <SplitChars text={PROFILE.name} />
     </p>
     <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 text-[15px] text-ink-2">
-      <p className="flex items-center gap-3">
-        <Logo auto className="text-[17px] text-ink" />
-        <span>© 2026 {PROFILE.name}. {PROFILE.city}.</span>
-      </p>
+      {/* Phones: the logo sits on its own line. Wider screens: its box keeps the open width, so the text
+          beside it does not move while the logo folds and unfolds. */}
+      <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+        <span className="sm:min-w-[96px]">
+          <Logo auto className="text-[17px] text-ink" />
+        </span>
+        <p>© 2026 {PROFILE.name}. {PROFILE.city}.</p>
+      </div>
       <ul className="flex flex-wrap gap-x-5 gap-y-2">
         {[...NAV, { label: "Contact", href: "#contact" }].map(({ label, href }) => (
           <li key={href}><a href={href} className="hover:text-ink">{label}</a></li>

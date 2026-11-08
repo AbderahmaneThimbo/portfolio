@@ -47,7 +47,7 @@ const Logo = ({ className = "", auto = false, hold = false }) => {
 
   return (
     <span
-      className={`logo inline-flex items-center font-semibold tracking-[-0.02em] ${className}`}
+      className={`logo inline-flex shrink-0 items-center whitespace-nowrap font-semibold tracking-[-0.02em] ${className}`}
       data-folded={folded}
       role="img"
       aria-label="Da7man"

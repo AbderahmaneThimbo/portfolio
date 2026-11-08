@@ -32,19 +32,23 @@ const ShotCard = ({ project, large = false, className = "" }) => {
     >
       <img
         src={shots[0]}
+        srcSet={`${shots[0].replace(".webp", "-720.webp")} 720w, ${shots[0]} 1200w`}
+        sizes={large ? "(min-width: 1024px) 760px, 100vw" : "(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"}
+        width="1200"
+        height="750"
         alt={`${name}, page d’accueil`}
         loading="lazy"
         className="h-full w-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-[1.04]"
       />
       {large && shots[1] && (
         <span className="absolute bottom-[18%] right-[5%] hidden w-[19%] rounded-[24px] bg-black p-[5px] transition-transform duration-700 group-hover:-translate-y-2 sm:block">
-          <img src={shots[1]} alt={`${name} sur téléphone`} loading="lazy" className="float w-full rounded-[19px]" />
+          <img src={shots[1]} alt={`${name} sur téléphone`} width="260" height="563" loading="lazy" className="float w-full rounded-[19px]" />
         </span>
       )}
       <div className="glass-clear absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-[var(--r-l)] px-4 py-3">
         <span className="min-w-0">
           <span className="block text-xl font-semibold tracking-[-0.02em]">{name}</span>
-          <span className="block truncate text-[15px] opacity-85">{kind}</span>
+          <span className="block truncate text-[15px]">{kind}</span>
         </span>
         <span className="ml-auto"><Arrow /></span>
       </div>
@@ -63,7 +67,7 @@ const NearUCard = ({ project }) => (
       {project.shots?.length ? (
         project.shots.slice(0, 2).map((src, i) => (
           <span key={src} className={`float w-[46%] max-w-[190px] rounded-[26px] bg-black p-[5px] ${i ? "float-late mt-12" : ""}`}>
-            <img src={src} alt={`NearU, écran ${i + 1}`} loading="lazy" className="w-full rounded-[21px]" />
+            <img src={src} alt={`NearU, écran ${i + 1}`} width="380" height="753" loading="lazy" className="w-full rounded-[21px]" />
           </span>
         ))
       ) : (
