@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
 import PropTypes from "prop-types";
 
 // 9 × 9 pixel drawings: the thumb's icon dissolves pixel by pixel and reforms as the other one.
@@ -88,10 +89,46 @@ const ThemeToggle = () => {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  const flip = () => {
+  const flip = (event) => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     try { localStorage.setItem("theme", next); } catch { /* storage blocked */ }
+
+    const apply = () => {
+      document.documentElement.dataset.theme = next;
+      flushSync(() => setTheme(next));
+    };
+
+    // Where supported, the new theme spreads in a circle from the toggle.
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || calm) return apply();
+
+    const r = event.currentTarget.getBoundingClientRect();
+    const x = r.left + r.width / 2;
+    const y = r.top + r.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+    // The switch must happen even if the browser never gets to run the transition (e.g. a throttled tab).
+    let applied = false;
+    const applyOnce = () => {
+      if (applied) return;
+      applied = true;
+      apply();
+    };
+    const transition = document.startViewTransition(applyOnce);
+    setTimeout(() => {
+      if (!applied) {
+        transition.skipTransition();
+        applyOnce();
+      }
+    }, 400);
+    transition.ready
+      .then(() => {
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 700, easing: "cubic-bezier(.3,.7,.2,1)", pseudoElement: "::view-transition-new(root)" }
+        );
+      })
+      .catch(() => {});
   };
 
   const dark = theme === "dark";

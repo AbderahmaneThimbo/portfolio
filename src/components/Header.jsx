@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NAV, PROFILE } from "../data/content";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 // Highlights the link of the section currently on screen.
 const useActiveSection = (ids) => {
@@ -24,6 +25,8 @@ const SECTION_IDS = NAV.map((n) => n.href.slice(1));
 const Header = () => {
   const [open, setOpen] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  // The logo folds and unfolds on its own; it stays open while the pointer or keyboard is on it.
+  const [onLogo, setOnLogo] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -36,10 +39,18 @@ const Header = () => {
     <header className="fixed left-1/2 top-3 z-40 w-[min(1100px,calc(100%-24px))] -translate-x-1/2 md:top-4">
       <nav
         aria-label="Navigation principale"
-        className="glass flex h-14 items-center gap-1 rounded-full pl-5 pr-2"
+        className="site-nav glass flex h-14 items-center gap-1 rounded-full pl-5 pr-2"
       >
-        <a href="#accueil" className="mr-auto text-[17px] font-semibold tracking-[-0.01em]">
-          {PROFILE.firstName}
+        <a
+          href="#accueil"
+          className="mr-auto text-xl"
+          aria-label={`Da7man, ${PROFILE.name}, retour en haut`}
+          onPointerEnter={() => setOnLogo(true)}
+          onPointerLeave={() => setOnLogo(false)}
+          onFocus={() => setOnLogo(true)}
+          onBlur={() => setOnLogo(false)}
+        >
+          <Logo auto hold={onLogo} />
         </a>
 
         <ul className="hidden items-center md:flex">

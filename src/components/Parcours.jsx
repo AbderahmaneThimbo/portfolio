@@ -1,9 +1,10 @@
 import { PROFILE, STORY, TIMELINE } from "../data/content";
+import { Title } from "./Split";
 
 const Parcours = () => (
   <section id="parcours" className="section container-page grid gap-10 md:grid-cols-[1.1fr_.9fr] md:gap-16">
     <div data-reveal>
-      <h2 className="title mb-8">De l’économie au code</h2>
+      <Title text="De l’économie au code" className="mb-8" />
       <div className="max-w-[56ch] space-y-5 text-xl leading-[1.6]">
         {STORY.map((p) => (
           <p key={p.slice(0, 24)}>{p}</p>
@@ -18,7 +19,7 @@ const Parcours = () => (
       </div>
     </div>
 
-    <ol data-reveal className="mat self-start rounded-[var(--r-xl)] p-3">
+    <ol className="mat self-start rounded-[var(--r-xl)] p-3">
       {TIMELINE.map(({ when, what, where, now }) => (
         <li
           key={what}

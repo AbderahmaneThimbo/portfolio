@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { PROJECTS } from "../data/content";
+import { Title } from "./Split";
 
 const byName = Object.fromEntries(PROJECTS.map((p) => [p.name, p]));
 
@@ -26,6 +27,7 @@ const ShotCard = ({ project, large = false, className = "" }) => {
       href={href}
       target="_blank"
       rel="noreferrer"
+      data-tilt
       className={`group relative block overflow-hidden rounded-[var(--r-xl)] bg-[var(--tint)] ${large ? "aspect-[4/3] sm:aspect-[16/10]" : "aspect-[4/3]"} ${className}`}
     >
       <img
@@ -36,7 +38,7 @@ const ShotCard = ({ project, large = false, className = "" }) => {
       />
       {large && shots[1] && (
         <span className="absolute bottom-[18%] right-[5%] hidden w-[19%] rounded-[24px] bg-black p-[5px] transition-transform duration-700 group-hover:-translate-y-2 sm:block">
-          <img src={shots[1]} alt={`${name} sur téléphone`} loading="lazy" className="w-full rounded-[19px]" />
+          <img src={shots[1]} alt={`${name} sur téléphone`} loading="lazy" className="float w-full rounded-[19px]" />
         </span>
       )}
       <div className="glass-clear absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-[var(--r-l)] px-4 py-3">
@@ -56,11 +58,11 @@ ShotCard.propTypes = {
 };
 
 const NearUCard = ({ project }) => (
-  <article className="mat flex flex-col rounded-[var(--r-xl)] p-3 lg:row-span-2">
+  <article data-tilt className="mat flex flex-col rounded-[var(--r-xl)] p-3 lg:row-span-2">
     <div className="flex flex-1 items-center justify-center gap-3 rounded-[var(--r-l)] bg-[var(--tint)] px-4 py-10">
       {project.shots?.length ? (
         project.shots.slice(0, 2).map((src, i) => (
-          <span key={src} className={`w-[46%] max-w-[190px] rounded-[26px] bg-black p-[5px] ${i ? "translate-y-6" : ""}`}>
+          <span key={src} className={`float w-[46%] max-w-[190px] rounded-[26px] bg-black p-[5px] ${i ? "float-late mt-12" : ""}`}>
             <img src={src} alt={`NearU, écran ${i + 1}`} loading="lazy" className="w-full rounded-[21px]" />
           </span>
         ))
@@ -89,7 +91,7 @@ const REQUEST = `POST /api/reservations
 }`;
 
 const ApiCard = ({ project }) => (
-  <a href={project.href} target="_blank" rel="noreferrer" className="mat group flex flex-col rounded-[var(--r-xl)] p-3">
+  <a href={project.href} target="_blank" rel="noreferrer" data-tilt className="mat group flex flex-col rounded-[var(--r-xl)] p-3">
     <pre className="overflow-x-auto rounded-[var(--r-l)] bg-[#0d0d0f] p-5 text-[13px] leading-relaxed text-[#e5e5ea]">
       <code>
         <span className="text-[#7dd3fc]">{REQUEST.split("\n")[0]}</span>
@@ -121,7 +123,7 @@ SmallCard.propTypes = { project: PropTypes.object.isRequired };
 const Work = () => (
   <section id="projets" className="section container-page">
     <div data-reveal className="mb-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
-      <h2 className="title">Projets</h2>
+      <Title text="Projets" />
       <p className="lead max-w-[40ch]">Des sites en ligne, une appli mobile, une API et des outils que j’utilise moi-même.</p>
     </div>
 

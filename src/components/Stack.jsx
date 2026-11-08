@@ -1,4 +1,5 @@
 import { STACK } from "../data/content";
+import { Title } from "./Split";
 
 // Bento placement per group: frontend and backend are the core, the rest sits beneath.
 const SPAN = {
@@ -12,7 +13,7 @@ const SPAN = {
 const Stack = () => (
   <section id="stack" className="section container-page">
     <div data-reveal className="mb-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
-      <h2 className="title">Ma stack</h2>
+      <Title text="Ma stack" />
       <p className="lead max-w-[40ch]">Les outils que j’utilise chaque jour, en production et sur mes projets.</p>
     </div>
 
@@ -24,7 +25,7 @@ const Stack = () => (
           <ul className={`grid gap-x-6 gap-y-3 ${items.length > 4 ? "sm:grid-cols-2" : ""}`}>
             {items.map(({ name, Icon }) => (
               <li key={name} className="flex items-center gap-3 text-[17px]">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--tint)]">
+                <span className="stack-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--tint)] transition-transform duration-300 hover:-rotate-6 hover:scale-110">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 {name}

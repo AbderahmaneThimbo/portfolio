@@ -176,12 +176,12 @@ body {
 
   /* The name across the whole footer: sized to the container width so it never overflows. */
   .footer-name {
-    font-size: min(calc((100vw - 32px) / 9.4), 118px);
+    font-size: min(calc((100vw - 32px) / 9.7), 116px);
   }
 
   @media (min-width: 768px) {
     .footer-name {
-      font-size: min(calc((100vw - 64px) / 9.4), 118px);
+      font-size: min(calc((100vw - 64px) / 9.7), 116px);
     }
   }
 
@@ -231,5 +231,161 @@ body {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* Words rise from behind their own baseline. */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Light that follows the pointer across glass and mat surfaces. */
+.glass,
+.mat,
+.glass-clear {
+  isolation: isolate;
+}
+
+.glass:not(.fixed):not(.absolute),
+.mat:not(.fixed):not(.absolute) {
+  position: relative;
+}
+
+.glass::after,
+.mat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.16), transparent 65%);
+  opacity: var(--light, 0);
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+:root[data-theme="light"] .glass::after,
+:root[data-theme="light"] .mat::after {
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.7), transparent 65%);
+}
+
+/* Cards lean slightly toward the pointer. */
+[data-tilt] {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Phones float gently inside their cards. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-late {
+  animation-delay: -3s;
+}
+
+/* The ambient light drifts slowly, like light moving across a room. */
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-4%, 3%, 0) scale(1.1); }
+}
+
+.ambient::before {
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+/* Logo: <Da7man/> folds up like paper and the tag closes on itself into </>.
+   Folding: the letters fold from the last to the first, then the gap closes.
+   Unfolding: the gap opens, then the letters unfold from the first to the last. */
+.logo-br {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.3, 1.4, 0.4, 1);
+}
+
+.logo-slash {
+  display: inline-block;
+  transition: color 0.4s ease;
+}
+
+.logo-name {
+  display: inline-block;
+  overflow: hidden;
+  width: var(--w, auto);
+  transition: width 0.65s cubic-bezier(0.65, 0, 0.2, 1);
+}
+
+.logo-name-inner {
+  display: inline-flex;
+  perspective: 240px;
+}
+
+.logo-ch {
+  display: inline-block;
+  transform-origin: left center;
+  transition: transform 0.55s cubic-bezier(0.3, 1.25, 0.4, 1), opacity 0.35s ease;
+  transition-delay: calc(var(--i) * 50ms + 140ms);
+}
+
+.logo-ch:nth-child(even) {
+  transform-origin: right center;
+}
+
+.logo[data-folded="true"] .logo-name {
+  width: 0;
+  transition-duration: 0.55s;
+  transition-delay: 0.32s;
+}
+
+/* Folding: each letter turns edge-on like a folded page before it fades, the last letter first. */
+.logo[data-folded="true"] .logo-ch {
+  opacity: 0;
+  transform: rotateY(-100deg);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.7, 0.4), opacity 0.25s ease;
+  transition-delay: calc((5 - var(--i)) * 45ms), calc((5 - var(--i)) * 45ms + 230ms);
+}
+
+.logo[data-folded="true"] .logo-ch:nth-child(even) {
+  transform: rotateY(100deg);
+}
+
+.logo[data-folded="true"] .logo-slash {
+  color: var(--accent);
+}
+
+a:hover .logo[data-folded="false"] .logo-br-open,
+a:focus-visible .logo[data-folded="false"] .logo-br-open { transform: translateX(-3px); }
+a:hover .logo[data-folded="false"] .logo-br-close,
+a:focus-visible .logo[data-folded="false"] .logo-br-close { transform: translateX(3px); }
+
+/* Theme switch: the new theme spreads in a circle from the toggle (see ThemeToggle). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .ambient::before {
+    animation: none;
+  }
+  [data-tilt] {
+    transform: none;
   }
 }

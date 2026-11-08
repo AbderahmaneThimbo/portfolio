@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PROFILE, PROJECT_TYPES, SOCIALS, whatsappLink } from "../data/content";
+import { Title } from "./Split";
 
 const buildMessage = ({ type, project, name }) => {
   const hello = name.trim() ? `Bonjour Abderahmane, je suis ${name.trim()}.` : "Bonjour Abderahmane,";
@@ -23,7 +24,7 @@ const Contact = () => {
     <section id="contact" className="section container-page">
       <div data-reveal className="mat grid gap-10 rounded-[var(--r-xl)] p-6 md:p-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-14">
         <form onSubmit={submit} className="flex flex-col">
-          <h2 className="title mb-4">Un projet en tête ?</h2>
+          <Title text="Un projet en tête ?" className="mb-4" />
           <p className="lead mb-8 max-w-[38ch]">Décris-le en deux lignes. Ton message s’ouvre dans WhatsApp, prêt à envoyer.</p>
 
           <fieldset className="mb-6">
