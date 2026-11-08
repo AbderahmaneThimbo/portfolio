@@ -33,7 +33,7 @@ const ShotCard = ({ project, large = false, className = "" }) => {
       <img
         src={shots[0]}
         srcSet={`${shots[0].replace(".webp", "-720.webp")} 720w, ${shots[0]} 1200w`}
-        sizes={large ? "(min-width: 1024px) 760px, 100vw" : "(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"}
+        sizes={large ? "(min-width: 1024px) 760px, calc(100vw - 32px)" : "(min-width: 1024px) 380px, (min-width: 768px) 50vw, calc(100vw - 32px)"}
         width="1200"
         height="750"
         alt={`${name}, page d’accueil`}
@@ -67,7 +67,7 @@ const NearUCard = ({ project }) => (
       {project.shots?.length ? (
         project.shots.slice(0, 2).map((src, i) => (
           <span key={src} className={`float w-[46%] max-w-[190px] rounded-[26px] bg-black p-[5px] ${i ? "float-late mt-12" : ""}`}>
-            <img src={src} alt={`NearU, écran ${i + 1}`} width="380" height="753" loading="lazy" className="w-full rounded-[21px]" />
+            <img src={src} srcSet={`${src.replace(".webp", "-240.webp")} 240w, ${src} 380w`} sizes="(min-width: 1024px) 180px, 40vw" alt={`NearU, écran ${i + 1}`} width="380" height="753" loading="lazy" className="w-full rounded-[21px]" />
           </span>
         ))
       ) : (

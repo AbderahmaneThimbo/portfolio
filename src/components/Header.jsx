@@ -35,11 +35,13 @@ const Header = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // The header box is taller than the bar (the closed menu still takes room below it, about a third of a
+  // phone screen): it lets taps through, and only the bar and the open menu catch them.
   return (
-    <header className="fixed left-1/2 top-3 z-40 w-[min(1100px,calc(100%-24px))] -translate-x-1/2 md:top-4">
+    <header className="pointer-events-none fixed left-1/2 top-3 z-40 w-[min(1100px,calc(100%-24px))] -translate-x-1/2 md:top-4">
       <nav
         aria-label="Navigation principale"
-        className="site-nav glass flex h-14 items-center gap-1 rounded-full pl-5 pr-2"
+        className="site-nav glass pointer-events-auto flex h-14 items-center gap-1 rounded-full pl-5 pr-2"
       >
         <a
           href="#accueil"
@@ -90,7 +92,7 @@ const Header = () => {
       <div
         id="menu-mobile"
         className={`glass mt-2 rounded-[var(--r-l)] p-2 transition-all duration-300 md:hidden ${
-          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
+          open ? "pointer-events-auto visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
         }`}
       >
         <ul>

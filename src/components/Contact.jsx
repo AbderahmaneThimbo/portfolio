@@ -38,8 +38,8 @@ const Contact = () => {
                     key={t}
                     type="button"
                     aria-pressed={on}
-                    onClick={() => setForm((f) => ({ ...f, type: on ? "" : t }))}
-                    className={`inline-flex h-11 touch-manipulation items-center rounded-full px-4 transition-colors ${
+                    onClick={() => setForm((f) => ({ ...f, type: t }))}
+                    className={`inline-flex h-11 touch-manipulation select-none items-center rounded-full px-4 transition-[background-color,color,transform] duration-150 active:scale-95 ${
                       on ? "bg-[var(--ink)] text-[var(--bg)]" : "bg-[var(--tint)] text-ink"
                     }`}
                   >
